@@ -6,4 +6,11 @@ public class SimpleEvent {
     public SimpleEvent(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "SimpleEvent{" +
+                "id='" + id + '\'' +
+                '}';
+    }
 }
