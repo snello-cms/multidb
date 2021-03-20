@@ -23,7 +23,7 @@ public class MysqlDbService implements DbService {
     @Override
     public List<Map<String, Object>> list() throws Exception {
         try (Connection connection = agroalDataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("select 1");
+            PreparedStatement preparedStatement = connection.prepareStatement(this.queries.get("select-users"));
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Object resul = resultSet.getObject(1);
