@@ -48,7 +48,7 @@ public class PostgresqlDbService implements DbService {
     }
 
     @Override
-    public void observe(@ObservesAsync @CustomerEvent("postgresql") SimpleEvent simpleEvent) throws Exception {
+    public void observe(SimpleEvent simpleEvent) throws Exception {
         logger.info(simpleEvent.toString());
     }
 }

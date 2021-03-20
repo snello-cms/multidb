@@ -50,7 +50,7 @@ public class MysqlDbService implements DbService {
     }
 
     @Override
-    public void observe(@ObservesAsync @CustomerEvent("mysql")  SimpleEvent simpleEvent) throws Exception {
+    public void observe(SimpleEvent simpleEvent) throws Exception {
         logger.info(simpleEvent.toString());
     }
 }

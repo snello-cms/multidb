@@ -2,11 +2,9 @@ package io.snello.multidb.repository.h2;
 
 import io.agroal.api.AgroalDataSource;
 import io.snello.api.DbService;
-import io.snello.multidb.annotations.CustomerEvent;
 import io.snello.multidb.model.pojo.SimpleEvent;
 import org.jboss.logging.Logger;
 
-import javax.enterprise.event.ObservesAsync;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +49,7 @@ public class H2DbService implements DbService {
     }
 
     @Override
-    public void observe(@ObservesAsync @CustomerEvent("h2") SimpleEvent simpleEvent) throws Exception {
+    public void observe(SimpleEvent simpleEvent) throws Exception {
         logger.info(simpleEvent.toString());
     }
 }
