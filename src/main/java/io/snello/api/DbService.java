@@ -1,4 +1,4 @@
-package io.snello.multidb.service.api;
+package io.snello.api;
 
 import java.util.List;
 import java.util.Map;

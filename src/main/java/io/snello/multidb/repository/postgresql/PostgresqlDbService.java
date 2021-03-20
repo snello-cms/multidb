@@ -1,21 +1,21 @@
-package io.snello.multidb.service.mysql;
+package io.snello.multidb.repository.postgresql;
 
 import io.agroal.api.AgroalDataSource;
-import io.snello.multidb.service.api.DbService;
+import io.snello.api.DbService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
-public class MysqlDbService implements DbService {
+public class PostgresqlDbService implements DbService {
 
     AgroalDataSource agroalDataSource;
+    Map<String, String> queries;
 
-    public MysqlDbService(AgroalDataSource agroalDataSource) {
+    public PostgresqlDbService(AgroalDataSource agroalDataSource, Map<String, String> queries) {
         this.agroalDataSource = agroalDataSource;
-        System.out.println("init MysqlDbService");
+        this.queries = queries;
+        System.out.println("init PostgresqlDbService");
     }
 
     @Override
@@ -32,13 +32,13 @@ public class MysqlDbService implements DbService {
                 }
             }
         }
-        System.out.println("mysql list");
+        System.out.println("postgresql list");
         return null;
     }
 
     @Override
     public Map<String, Object> single() throws Exception {
-        System.out.println("mysql single");
+        System.out.println("postgresql single");
         return null;
     }
 }

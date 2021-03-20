@@ -1,8 +1,8 @@
 package io.snello.multidb.service.rs;
 
-import io.snello.multidb.service.api.DbService;
 
-import javax.enterprise.inject.Default;
+import io.snello.api.DbService;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
