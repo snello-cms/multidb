@@ -2,7 +2,11 @@ package io.snello.multidb.repository.mysql;
 
 import io.agroal.api.AgroalDataSource;
 import io.snello.api.DbService;
+import io.snello.multidb.annotations.CustomerEvent;
+import io.snello.multidb.model.pojo.SimpleEvent;
+import org.jboss.logging.Logger;
 
+import javax.enterprise.event.ObservesAsync;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,13 +15,14 @@ import java.util.Map;
 
 public class MysqlDbService implements DbService {
 
+    Logger logger = Logger.getLogger(getClass());
     AgroalDataSource agroalDataSource;
     Map<String, String> queries;
 
     public MysqlDbService(AgroalDataSource agroalDataSource, Map<String, String> queries) {
         this.agroalDataSource = agroalDataSource;
         this.queries = queries;
-        System.out.println("init MysqlDbService");
+        logger.info("init MysqlDbService");
     }
 
     @Override
@@ -28,19 +33,24 @@ public class MysqlDbService implements DbService {
                 if (resultSet.next()) {
                     Object resul = resultSet.getObject(1);
                     if (resul != null) {
-                        System.out.println("1");
+                        logger.info("1");
                         return null;
                     }
                 }
             }
         }
-        System.out.println("mysql list");
+        logger.info("mysql list");
         return null;
     }
 
     @Override
     public Map<String, Object> single() throws Exception {
-        System.out.println("mysql single");
+        logger.info("mysql single");
         return null;
+    }
+
+    @Override
+    public void observe(@ObservesAsync @CustomerEvent("mysql")  SimpleEvent simpleEvent) throws Exception {
+        logger.info(simpleEvent.toString());
     }
 }

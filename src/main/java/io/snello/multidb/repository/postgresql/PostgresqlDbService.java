@@ -2,20 +2,25 @@ package io.snello.multidb.repository.postgresql;
 
 import io.agroal.api.AgroalDataSource;
 import io.snello.api.DbService;
+import io.snello.multidb.annotations.CustomerEvent;
+import io.snello.multidb.model.pojo.SimpleEvent;
+import org.jboss.logging.Logger;
 
+import javax.enterprise.event.ObservesAsync;
 import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
 public class PostgresqlDbService implements DbService {
 
+    Logger logger = Logger.getLogger(getClass());
     AgroalDataSource agroalDataSource;
     Map<String, String> queries;
 
     public PostgresqlDbService(AgroalDataSource agroalDataSource, Map<String, String> queries) {
         this.agroalDataSource = agroalDataSource;
         this.queries = queries;
-        System.out.println("init PostgresqlDbService");
+        logger.info("init PostgresqlDbService");
     }
 
     @Override
@@ -26,19 +31,24 @@ public class PostgresqlDbService implements DbService {
                 if (resultSet.next()) {
                     Object resul = resultSet.getObject(1);
                     if (resul != null) {
-                        System.out.println("1");
+                        logger.info("1");
                         return null;
                     }
                 }
             }
         }
-        System.out.println("postgresql list");
+        logger.info("postgresql list");
         return null;
     }
 
     @Override
     public Map<String, Object> single() throws Exception {
-        System.out.println("postgresql single");
+        logger.info("postgresql single");
         return null;
+    }
+
+    @Override
+    public void observe(@ObservesAsync @CustomerEvent("postgresql") SimpleEvent simpleEvent) throws Exception {
+        logger.info(simpleEvent.toString());
     }
 }

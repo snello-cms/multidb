@@ -47,6 +47,7 @@ public class DbProducer {
     }
 
     @Produces
+    @ApplicationScoped
     public DbService db() throws Exception {
         System.out.println("dbtype: " + dbtype);
         switch (dbtype) {
